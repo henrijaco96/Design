@@ -113,10 +113,10 @@ public class Prestamo {
         Date fechaI,fechaF;
         Calendar calendario = Calendar.getInstance();
         
-        interes = this.tasaInteres;
-        cantidad = this.monto;
+        interes = this.getTasaInteres();
+        cantidad = this.getMonto();
         numeroCuotas = 0;
-        fechaI = this.fechaInicio;
+        fechaI = this.getFechaInicio();
         cuotaMensual*=interes;
         calendario.setTime(fechaI);
                 
@@ -125,7 +125,7 @@ public class Prestamo {
               cantidad-=cuotaMensual;
               numeroCuotas++;
           }while(cantidad>0);
-         this.cantidadCuotas=numeroCuotas;
+         this.setCantidadCuotas(numeroCuotas);
          
         calendario.add(Calendar.MONTH, numeroCuotas);
         fechaF=(Date) calendario.getTime();
@@ -168,13 +168,21 @@ public class Prestamo {
     
     public double calcularInteresMensual(){
         int numC;
-        double pres,inte,intM;
+        double pres,inte,intM=0;
+        Date fechaUltimo=this.getFechaUltimoPago();
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
         
-        numC = this.getCantidadCuotas();
-        pres = this.getMonto();
-        inte = this.getTasaInteres();
+        try{
+            if(fechaUltimo.before(calendario.getTime())){
+                
+            }
+        }
         
-        intM = (pres/numC)*inte;
+        catch(Exception e){
+            
+        }
+    
         
         return intM;
     }
