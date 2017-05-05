@@ -174,7 +174,7 @@ public class Prestamo {
         calendario.set(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
         
         try{
-            if(fechaUltimo.before(calendario.getTime())){
+            if(!fechaUltimo.before(calendario.getTime())){
                 
             }
         }
