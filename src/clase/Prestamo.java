@@ -14,7 +14,7 @@ public class Prestamo {
     public boolean estado;
     public String observaciones;
     Cliente cliente = new Cliente();
-    Cuota cuota = new Cuota();
+   // Cuota cuota = new Cuota();
     errorPrestamo ep = new errorPrestamo();
     ArrayList<Cuota> cuotas ;
     
@@ -150,14 +150,14 @@ public class Prestamo {
         }                    
     }
     
-    public void crearNuevaCuota(){
-       this.cuota = new Cuota(); 
+    public Cuota crearNuevaCuota(){
+      Cuota cuota = new Cuota();
        
-               
+       return cuota;        
     }
     
     public void agregarCuota(Cuota cu){
-           cuotas.add(cuota);
+           cuotas.add(cu);
         Date fechaU;
         
         fechaU=this.getFechaUltimoPago();
@@ -168,13 +168,17 @@ public class Prestamo {
     
     public double calcularInteresMensual(){
         int numC;
-        double pres,inte,intM=0;
+        double debo,interes,intM=0;
+        debo=this.getSaldo();
         Date fechaUltimo=this.getFechaUltimoPago();
         Calendar calendario = Calendar.getInstance();
         calendario.set(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
         
         try{
             if(!fechaUltimo.before(calendario.getTime())){
+                interes=debo*this.getTasaInteres();
+            }
+            else{
                 
             }
         }

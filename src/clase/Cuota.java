@@ -90,13 +90,11 @@ public class Cuota {
         valor = this.getValor();
         saldoAnterior = this.getSaldoActualizado();
         inter = this.getInteres();
+        capital=this.getCapital();
         
         try{
-           capital = valor*(1-inter); 
-           saldoAct = saldoAnterior-capital;
-           this.setCapital(capital);
-           this.setSaldoAnterior(saldoAnterior);
-           this.setSaldoActualizado(saldoAct);
+          capital-=valor;
+          
           
         }
         
