@@ -2,12 +2,19 @@ package clase;
 
 import conexion.conexion;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 public class ControladorCliente {
 
     conexion cn = new conexion();
     errorPrestamo ep = new errorPrestamo();
+    
 
 public void agregar(Cliente cli) throws Exception{
     
@@ -25,8 +32,24 @@ public void agregar(Cliente cli) throws Exception{
     }
 }
 
-public ResultSet obtener(){
-    return(cn.getValores("SELECT * FROM cliente"));
+public List<Cliente> obtener(){
+     List<Cliente> clientes = new ArrayList();
+     ResultSet rs;
+     int contador=0;
+     
+      rs =  cn.getValores("SELECT * FROM cliente"); 
+      
+        try {
+            while(rs.next()){
+            clientes.add((Cliente) rs.getRef(contador));
+            contador++;    
+            } 
+        } 
+        
+        catch (SQLException ex) {
+            Logger.getLogger(ControladorCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return clientes;
 }
 
 public void eliminar(Cliente cli){
